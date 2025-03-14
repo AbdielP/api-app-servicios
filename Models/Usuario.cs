@@ -32,8 +32,19 @@ namespace api_app_servicios.Models
         public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
 
         // Relaciones
-        public ICollection<Ubicacion>? Ubicaciones { get; set; }
         public ICollection<UsuarioCategoria>? UsuarioCategorias { get; set; }
         public ICollection<Permiso>? Permisos { get; set; }
+        public ICollection<Ubicacion>? Ubicaciones { get; set; }
+        public ICollection<Mensaje>? MensajesEnviados { get; set; }
+        public ICollection<Mensaje>? MensajesRecibidos { get; set; }
+        public ICollection<Calificacion>? Calificaciones { get; set; }
+
+
+        //public ICollection<Ubicacion>? Ubicaciones { get; set; }
+        //public ICollection<Trabajo>? TrabajosSolicitados { get; set; }
+        //public ICollection<Trabajo>? TrabajosRealizados { get; set; }
+        //public ICollection<Postulacion>? Postulaciones { get; set; }
+        //public ICollection<UsuarioCategoria>? UsuarioCategorias { get; set; }
+        //public ICollection<Permiso>? Permisos { get; set; }
     }
 }

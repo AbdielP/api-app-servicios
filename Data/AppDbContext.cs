@@ -11,30 +11,41 @@ public class AppDbContext : DbContext
     public DbSet<Categoria> Categorias { get; set; }
     public DbSet<UsuarioCategoria> UsuarioCategorias { get; set; }
     public DbSet<Permiso> Permisos { get; set; }
+    public DbSet<Mensaje> Mensajes { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        // Relación de muchos a muchos entre Usuario y Categoria
-        modelBuilder.Entity<UsuarioCategoria>()
-            .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
-        modelBuilder.Entity<UsuarioCategoria>()
-            .HasOne(uc => uc.Usuario)
-            .WithMany(u => u.UsuarioCategorias)
-            .HasForeignKey(uc => uc.UsuarioId);
-        modelBuilder.Entity<UsuarioCategoria>()
-            .HasOne(uc => uc.Categoria)
-            .WithMany(c => c.UsuarioCategorias)
-            .HasForeignKey(uc => uc.CategoriaId);
-        // Relación de uno a muchos entre Usuario y Ubicacion
-        modelBuilder.Entity<Ubicacion>()
-            .HasOne(u => u.Usuario)
-            .WithMany(u => u.Ubicaciones)
-            .HasForeignKey(u => u.UsuarioId);
-        // Relación de uno a muchos entre Usuario y Permiso
-        modelBuilder.Entity<Permiso>()
-            .HasOne(p => p.Usuario)
-            .WithMany(u => u.Permisos)
-            .HasForeignKey(p => p.UsuarioId);
+        modelBuilder.Entity<Mensaje>()
+            .HasOne(m => m.Remitente)
+            .WithMany(u => u.MensajesEnviados)
+            .HasForeignKey(m => m.RemitenteId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Mensaje>()
+            .HasOne(m => m.Destinatario)
+            .WithMany(u => u.MensajesRecibidos)
+            .HasForeignKey(m => m.DestinatarioId)
+            .OnDelete(DeleteBehavior.Restrict);
+        //// Relación de muchos a muchos entre Usuario y Categoria
+        //modelBuilder.Entity<UsuarioCategoria>()
+        //    .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
+        //modelBuilder.Entity<UsuarioCategoria>()
+        //    .HasOne(uc => uc.Usuario)
+        //    .WithMany(u => u.UsuarioCategorias)
+        //    .HasForeignKey(uc => uc.UsuarioId);
+        //modelBuilder.Entity<UsuarioCategoria>()
+        //    .HasOne(uc => uc.Categoria)
+        //    .WithMany(c => c.UsuarioCategorias)
+        //    .HasForeignKey(uc => uc.CategoriaId);
+        //// Relación de uno a muchos entre Usuario y Ubicacion
+        //modelBuilder.Entity<Ubicacion>()
+        //    .HasOne(u => u.Usuario)
+        //    .WithMany(u => u.Ubicaciones)
+        //    .HasForeignKey(u => u.UsuarioId);
+        //// Relación de uno a muchos entre Usuario y Permiso
+        //modelBuilder.Entity<Permiso>()
+        //    .HasOne(p => p.Usuario)
+        //    .WithMany(u => u.Permisos)
+        //    .HasForeignKey(p => p.UsuarioId);
     }
 
 }
