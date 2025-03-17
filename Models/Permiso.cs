@@ -11,7 +11,7 @@ namespace api_app_servicios.Models
         [Required, MaxLength(50)]
         public string Tipo { get; set; } = string.Empty;
 
-        // Relacion con Usuario
+        // Relacion con Usuario 1:1
         public Usuario Usuario { get; set; } = null!;
     }
 }

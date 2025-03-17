@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace api_app_servicios.Models
 {
@@ -28,7 +29,7 @@ namespace api_app_servicios.Models
         public string Rol { get; set; } = "cliente"; // Puede ser 'cliente' o 'profesional'
 
         public string? Ruc { get; set; } // Solo para profesionales
-
+        [Column(TypeName = "timestamp")]
         public DateTime FechaRegistro { get; set; } = DateTime.UtcNow;
 
         // Relaciones
@@ -37,14 +38,9 @@ namespace api_app_servicios.Models
         public ICollection<Ubicacion>? Ubicaciones { get; set; }
         public ICollection<Mensaje>? MensajesEnviados { get; set; }
         public ICollection<Mensaje>? MensajesRecibidos { get; set; }
-        public ICollection<Calificacion>? Calificaciones { get; set; }
+        public ICollection<Calificacion>? CalificacionesDadas { get; set; } // Usuario que califica
+        public ICollection<Calificacion>? CalificacionesRecibidas { get; set; } // Profesional que es calificado
 
 
-        //public ICollection<Ubicacion>? Ubicaciones { get; set; }
-        //public ICollection<Trabajo>? TrabajosSolicitados { get; set; }
-        //public ICollection<Trabajo>? TrabajosRealizados { get; set; }
-        //public ICollection<Postulacion>? Postulaciones { get; set; }
-        //public ICollection<UsuarioCategoria>? UsuarioCategorias { get; set; }
-        //public ICollection<Permiso>? Permisos { get; set; }
     }
 }

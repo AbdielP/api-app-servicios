@@ -16,7 +16,7 @@ namespace api_app_servicios.Models
         public double Longitud { get; set; }
         [MaxLength(50)]
         public string Tipo { get; set; } = "residencial"; // Puede ser 'residencial' o 'comerial'
-        // Relacion con usuario
+        // Relacion con usuario 1:N
         public required Usuario Usuario { get; set; }
     }
 }

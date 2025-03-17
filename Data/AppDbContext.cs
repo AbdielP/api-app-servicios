@@ -25,27 +25,30 @@ public class AppDbContext : DbContext
             .WithMany(u => u.MensajesRecibidos)
             .HasForeignKey(m => m.DestinatarioId)
             .OnDelete(DeleteBehavior.Restrict);
-        //// Relación de muchos a muchos entre Usuario y Categoria
-        //modelBuilder.Entity<UsuarioCategoria>()
-        //    .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
-        //modelBuilder.Entity<UsuarioCategoria>()
-        //    .HasOne(uc => uc.Usuario)
-        //    .WithMany(u => u.UsuarioCategorias)
-        //    .HasForeignKey(uc => uc.UsuarioId);
-        //modelBuilder.Entity<UsuarioCategoria>()
-        //    .HasOne(uc => uc.Categoria)
-        //    .WithMany(c => c.UsuarioCategorias)
-        //    .HasForeignKey(uc => uc.CategoriaId);
-        //// Relación de uno a muchos entre Usuario y Ubicacion
-        //modelBuilder.Entity<Ubicacion>()
-        //    .HasOne(u => u.Usuario)
-        //    .WithMany(u => u.Ubicaciones)
-        //    .HasForeignKey(u => u.UsuarioId);
-        //// Relación de uno a muchos entre Usuario y Permiso
-        //modelBuilder.Entity<Permiso>()
-        //    .HasOne(p => p.Usuario)
-        //    .WithMany(u => u.Permisos)
-        //    .HasForeignKey(p => p.UsuarioId);
+        modelBuilder.Entity<Permiso>()
+            .HasOne(p => p.Usuario)
+            .WithMany(u => u.Permisos)
+            .HasForeignKey(p => p.UsuarioId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Ubicacion>()
+            .HasOne(u => u.Usuario)
+            .WithMany(u => u.Ubicaciones)
+            .HasForeignKey(u => u.UsuarioId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Usuario)
+            .WithMany(u => u.CalificacionesDadas)
+            .HasForeignKey(c => c.UsuarioId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Profesional)
+            .WithMany(u => u.CalificacionesRecibidas)
+            .HasForeignKey(c => c.ProfesionalId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<UsuarioCategoria>()
+            .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
+
+
     }
 
 }

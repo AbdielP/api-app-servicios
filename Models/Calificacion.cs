@@ -24,3 +24,4 @@ namespace api_app_servicios.Models
         public Usuario Profesional { get; set; } = null!;
     }
 }
+// Unicamente el usuario que solicita el trabajo puede calificar al profesional que lo realizó.
