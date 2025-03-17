@@ -20,6 +20,13 @@ namespace api_app_servicios.Models
         public string Estado { get; set; } = string.Empty;
         [Column(TypeName = "timestamp")]
         public DateTime Fecha_creacion { get; set; } = DateTime.UtcNow;
-        // FALTAN RELACIONES
+
+        // Relacion 1:N con Usuario
+        public Guid UsuarioId { get; set; }
+        public Usuario Usuario { get; set; } = null!;
+
+        // Relacion 1:N con Categoria
+        public Guid CategoriaId { get; set; }
+        public Categoria Categoria { get; set; } = null!;
     }
 }

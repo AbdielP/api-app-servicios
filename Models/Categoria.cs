@@ -13,5 +13,7 @@ namespace api_app_servicios.Models
 
         // Relacion con usuarios (muchos a muchos)
         public ICollection<UsuarioCategoria>? UsuarioCategorias { get; set; }
+        // Relacion con solicitudes 1:N
+        public ICollection<Solicitud>? Solicitudes { get; set; }
     }
 }

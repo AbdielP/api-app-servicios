@@ -40,7 +40,6 @@ namespace api_app_servicios.Models
         public ICollection<Mensaje>? MensajesRecibidos { get; set; }
         public ICollection<Calificacion>? CalificacionesDadas { get; set; } // Usuario que califica
         public ICollection<Calificacion>? CalificacionesRecibidas { get; set; } // Profesional que es calificado
-
-
+        public ICollection<Solicitud>? Solicitudes { get; set; } 
     }
 }
