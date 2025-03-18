@@ -28,5 +28,9 @@ namespace api_app_servicios.Models
         // Relacion 1:N con Categoria
         public Guid CategoriaId { get; set; }
         public Categoria Categoria { get; set; } = null!;
+
+        // Relacion 1:1 con Trabajo
+        public Trabajo? Trabajo { get; set; } = null!;
+
     }
 }
