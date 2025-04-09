@@ -16,5 +16,10 @@ namespace api_app_servicios.Models
         // Relacion con profesional 1:N
         public Guid ProfesionalId { get; set; }
         public Usuario Profesional { get; set; } = null!;
+
+        // Relacion con calificacion: Uno a uno 1:1
+        public Guid CalificacionId { get; set; }
+        public Calificacion Calificacion { get; set; } = null!;
+
     }
 }

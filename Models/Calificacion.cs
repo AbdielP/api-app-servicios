@@ -11,7 +11,7 @@ namespace api_app_servicios.Models
         public string Comentario { get; set; } = string.Empty;
         public DateTime FechaCalificacion { get; set; } = DateTime.UtcNow;
 
-        // Relació 1:1 con trabajo  
+        // Relación 1:1 con trabajo  
         public Guid TrabajoId { get; set; }
         public Trabajo Trabajo { get; set; } = null!;
 

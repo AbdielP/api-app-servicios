@@ -15,6 +15,7 @@ public class AppDbContext : DbContext
     public DbSet<Calificacion> Calificaciones { get; set; }
     public DbSet<Solicitud> Solicitudes { get; set; }
     public DbSet<Postulacion> Postulaciones { get; set; }
+    public DbSet<Trabajo> Trabajos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,6 +48,11 @@ public class AppDbContext : DbContext
             .HasOne(c => c.Profesional)
             .WithMany(u => u.CalificacionesRecibidas)
             .HasForeignKey(c => c.ProfesionalId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Trabajo)
+            .WithOne(t => t.Calificacion)
+            .HasForeignKey<Calificacion>(c => c.TrabajoId)
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<UsuarioCategoria>()
             .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
