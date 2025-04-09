@@ -6,7 +6,7 @@ namespace api_app_servicios.Models
     public class Solicitud
     {
         [Key]
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         [MaxLength(200)]
         public string Direccion { get; set; } = string.Empty;
         [Column(TypeName = "numeric(9,6)")]
@@ -28,5 +28,12 @@ namespace api_app_servicios.Models
         // Relacion 1:N con Categoria
         public Guid CategoriaId { get; set; }
         public Categoria Categoria { get; set; } = null!;
+
+        // Relacion con postulaciones 1:N
+        public ICollection<Postulacion>? Postulaciones { get; set; }
+        
+        // Relacion 1:1 con Trabajo
+        public Trabajo? Trabajo { get; set; }
+
     }
 }

@@ -12,6 +12,9 @@ public class AppDbContext : DbContext
     public DbSet<UsuarioCategoria> UsuarioCategorias { get; set; }
     public DbSet<Permiso> Permisos { get; set; }
     public DbSet<Mensaje> Mensajes { get; set; }
+    public DbSet<Calificacion> Calificaciones { get; set; }
+    public DbSet<Solicitud> Solicitudes { get; set; }
+    public DbSet<Postulacion> Postulaciones { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -47,8 +50,41 @@ public class AppDbContext : DbContext
             .OnDelete(DeleteBehavior.Restrict);
         modelBuilder.Entity<UsuarioCategoria>()
             .HasKey(uc => new { uc.UsuarioId, uc.CategoriaId });
-
-
+        modelBuilder.Entity<Postulacion>()
+            .HasOne(p => p.Solicitud)
+            .WithMany(s => s.Postulaciones)
+            .HasForeignKey(p => p.SolicitudId)
+            .OnDelete(DeleteBehavior.Cascade);
+        modelBuilder.Entity<Postulacion>()
+            .HasOne(p => p.Profesional)
+            .WithMany(u => u.Postulaciones)
+            .HasForeignKey(p => p.ProfesionalId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Trabajo>()
+            .HasOne(t => t.Solicitud)
+            .WithOne(s => s.Trabajo)
+            .HasForeignKey<Trabajo>(t => t.SolicitudId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Trabajo>()
+            .HasOne(t => t.Profesional)
+            .WithMany(u => u.Trabajos)
+            .HasForeignKey(t => t.ProfesionalId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Trabajo)
+            .WithOne()
+            .HasForeignKey<Calificacion>(c => c.TrabajoId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Usuario)
+            .WithMany(u => u.CalificacionesDadas)
+            .HasForeignKey(c => c.UsuarioId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Calificacion>()
+            .HasOne(c => c.Profesional)
+            .WithMany(u => u.CalificacionesRecibidas)
+            .HasForeignKey(c => c.ProfesionalId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 
 }
